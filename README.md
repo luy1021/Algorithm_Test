@@ -56,10 +56,10 @@ proc contents data = WORK.TRY110;
   
 proc format;
 value melon_seeds_l 
-  1="jiaotang"
-  2="hongzao" 
-  3="yuanwei"
-  4="bumai";
+  1="caramel"
+  2="red date" 
+  3="origin"
+  4="nonpurchase";
 run;
 ```
 After that, we make descriptive statistics for the relevant data in the data file, and the code is as follows：<br>
