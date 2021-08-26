@@ -45,11 +45,11 @@ Then, the sensitivity coefficients of different impact factors are estimated by 
 ## Usage
 <!-- SAS Files -->
 ### SAS Files
-There are three folders in the SAS folder, which correspond to SAS codes of different kinds of products. The following takes 110G melon seeds as an example to explain the use of relevant codes.<br>
+There are three folders in the SAS folder, which correspond to SAS codes of different kinds of products. The following takes 110g menlon seeds as an example to explain the use of relevant codes.<br>
 
 In the 110g folder, there are three SAS code files, among which "try110nop.sas" means that in the consumer utility function, only the influence of product price is considered to establish the model; "try110xx.sas" means that in the consumer utility function, the influence of linear form of network effect is considered to establish the model. "try110.sas" means that the network effect in logarithmic form is considered in the consumer utility function to build a model. Take the try110.sas code file as an example.<br>
 
-First, we import the "TRY110" data file and explain the contents of the data file. In this case, the data file is an Excel file, and the fields include: classification variable melon_seeds, where 1 represents caramelized seeds, 2 represents date seeds, and 3 represents original seeds. 4 means not to buy the product. Price is the Price, x is the sales volume in the last month, xx is the market share in the last month, zong is the sales volume in the last month, ln is the network effect, where ln=log (C*xx+D), the values of C and D are related to the product.<br>
+First, we import the "TRY110" data file and explain the contents of the data file. In this case, the data file is an Excel file, and the fields include: classification variable melon_seeds, where "1" represents caramal seeds, "2" represents red date seeds, "3" represents original taste seeds, and "4" means nonpurchase people. "price" is the price of the product, "x" is the sales volume in the last month of each product, "xx" is the market share in the last month, and "zong" is the whole sales volume in the last month. "ln" is the network effect, where ln=log (C*xx+D), the values of C and D are related to the product.<br>
 ```
 proc contents data = WORK.TRY110;
 	run;
@@ -71,27 +71,27 @@ run;
 
 proc means data = WORK.TRY110;
 	format melon_seeds melon_seedsl.;
-	var price lnCD1= WORK.TRY110;
+	var price ln= WORK.TRY110;
 	run;
 ```
 Finally, logistic regression in SAS is used to test the explanatory power and prediction accuracy of the model. In this example, we get the results of the model under the dual influence of price and logarithmic network effect. The following is a code example:<br>
 ```
 proc logistic data = WORK.TRY110;
-	model melon_seeds = price lnCD1/ link = glogit;
+	model melon_seeds = price ln/ link = glogit;
 run;
 ```
 <!-- MATLAB Files -->
 ### MATLAB Files
-Under the MATLAB folder we created four folders based on different pricing strategies, The optimal file, myOPic file, Onestep file, and NOP file represent the optimal pricing strategy, the myOPic file, the onestep file, and the NOP file represent the standard MNL model pricing strategy without network effects. We will explain how to use the code one by one.
+Under the MATLAB folder we created four folders based on different pricing policy, The "optimal" file, "myopic" file, "onestep" file, and "nop" file represent the optimal pricing policy, the myopic pricing policy, the onestep-ahead pricing policy, and the standard MNL model pricing strategy without network effects, respectively. We will explain how to use the code one by one.
 <!-- Optimal File -->
 #### Optimal File
-In the optimal file, we divide it by product category. Taking the "optimal110.m" code file as an example, we first enter the correlation coefficient required by the model.
+In the optimal file, we divide it by product category. Taking the "optimal110.m" code file as an example, we first input the correlation coefficient required by the model.
 ```
 a1=1.15;a2=1.16;a3=1.12;b1=0.16;b2=0.25;b3=0.29;D1=2.06;D2=2.03;D3=2.03;r1=0.67;r2=0.78;r3=0.69;C1=9.99;C2=10.01;C3=10.00;
 x1=0;x2=0;x3=0;theta=0.99;
 t=1;
 ```
-After that, the profit function was established with the goal of maximizing the total profit, and the upper and lower bounds of the cycles and decision variables were set up, and the solution was carried out. The code is as follows:
+After that, the profit function is established with the goal of maximizing the total revenue, and the upper and lower bounds of the cycles and decision variables are set up, and the solution is carried out. The code is as follows:
 
 ```
 while t<=1
@@ -254,12 +254,12 @@ pipi=pi12+pi11+pi10+pi9+pi8+pi7+pi6+pi5+pi4+pi3+pi2+pi1 %total revenue
 ```
 <!-- Myopic File -->
 #### Myopic File
-In the MyOPic file, we divide the products according to the product category. Taking the code file "PI110. m" as an example, we first input the correlation coefficient required by the model.
+In the myopic file, we divide the products according to the product category. Taking the code file "pi110.m" as an example, we first input the correlation coefficient required by the model.
 ```
 a1=1.15;a2=1.16;a3=1.12;b1=0.16;b2=0.25;b3=0.29;D1=2.06;D2=2.03;D3=2.03;r1=0.67;r2=0.78;r3=0.69;C1=9.99;C2=10.01;C3=10.00;
 x1=0;x2=0;x3=0;t=1;
 ```
-After that, the market share is established as the decision variable and the single-period profit maximization is taken as the goal. The code is as follows:
+After that, the market share is established as the decision variable and the single period profit maximization is taken as the goal. The code is as follows:
 ```
 syms q1 q2 q3
 eq1=a1+r1*log(C1*x1+D1)-log(q1)-1+log(1-q1-q2-q3)-(b1/(1-q1-q2-q3))*(q1/b1+q2/b2+q3/b3);
@@ -276,12 +276,12 @@ pi=(1/b1)*q1*(a1+r1*log(C1*x1+D1)-log(q1)+log(1-q1-q2-q3))+(1/b2)*q2*(a2+r2*log(
 ```
 <!-- Onestep File -->
 #### Onestep File
-In the Onestep file, we divided the products according to product categories. Taking the code file "OneStep110.m" as an example, we first input the correlation coefficient required by the model.
+In the onestep file, we divided the products according to product categories. Taking the code file "onestep110.m" as an example, we first input the correlation coefficient required by the model.
 ```
 a1=1.15;a2=1.16;a3=1.12;b1=0.16;b2=0.25;b3=0.29;D1=2.06;D2=2.03;D3=2.03;r1=0.67;r2=0.78;r3=0.69;C1=9.99;C2=10.01;C3=10.00;
 x1=0;x2=0;x3=0;theta=0.99;t=1;
 ```
-Then, the profit function was established with the goal of two-stage profit maximization, and the upper and lower bounds of the initial value and decision variables were set up to solve the problem. The code looks like this:
+Then, the profit function is established with the goal of two-stage profit maximization, and the upper and lower bounds of the initial value and decision variables are set up to solve the problem. The code looks like this:
 ```
 f=@(x)(-((1/b1)*x(1)*(a1+r1*log(C1*x(4)+D1)-log(x(1))+log(1-x(1)-x(2)-x(3)))+(1/b2)*x(2)*(a2+r2*log(C2*x(5)+D2)-log(x(2))+log(1-x(1)-x(2)-x(3)))+(1/b3)*x(3)*(a3+r3*log(C3*x(6)+D3)-log(x(3))+log(1-x(1)-x(2)-x(3)))+theta*((1/b1)*x(4)*(a1+r1*log(C1*x1+D1)-log(x(4))+log(1-x(4)-x(5)-x(6)))+(1/b2)*x(5)*(a2+r2*log(C2*x2+D2)-log(x(5))+log(1-x(4)-x(5)-x(6)))+(1/b3)*x(6)*(a3+r3*log(C3*x3+D3)-log(x(6))+log(1-x(4)-x(5)-x(6))))));
 x0=[0.01;0.01;0.01;0.01;0.01;0.01];
@@ -313,13 +313,12 @@ sum(pi)
 ```
 <!-- Nop File -->
 #### Nop File
-In the nop file, we divided the products according to product categories. Taking the code file "Pinop110. m" as an example, we first input the correlation coefficient required by the model.
+In the nop file, we divided the products according to product categories. Taking the code file "pinop110.m" as an example, we first input the correlation coefficient required by the model.
 ```
 a1=1.29;a2=1.20;a3=1.23;b1=0.13;b2=0.27;b3=0.34;
 x1=0;x2=0;x3=0;t=1;
 ```
-After that, the market share is established as the decision variable and the single-period profit maximization is taken as the goal.
-The code is as follows:
+After that, the market share is established as the decision variable and the single-period profit maximization is taken as the goal. The code is as follows:
 ```
 syms q1 q2 q3
 eq1=a1-log(q1)-1+log(1-q1-q2-q3)-(b1/(1-q1-q2-q3))*(q1/b1+q2/b2+q3/b3);
