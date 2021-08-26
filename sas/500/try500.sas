@@ -16,7 +16,7 @@ run;
 
 proc means data = WORK.TRY500;
 	format melon_seeds melon_seedsl.;
-	var price lnCD1= WORK.TRY500;
+	var price ln= WORK.TRY500;
 	run;
 
 proc logistic data = WORK.TRY500;
