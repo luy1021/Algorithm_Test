@@ -3,11 +3,10 @@ proc contents data = WORK.TRY500sqrt;
 
 proc format;
 value melon_seeds_l 
-  1="jiaotang"
-  2="hongzao" 
-  3="hetao"
-  4="yuanwei"
-  5="bumai";
+  1="caramel"
+  2="red dates" 
+  3="origin"
+  4="nonpurchase";
 run;
 
 proc freq data = WORK.TRY500sqrt;
