@@ -19,6 +19,6 @@ proc means data = WORK.TRY500xx;
 	var price xx= WORK.TRY500xx;
 	run;
 
-proc logistic data = WORK.TRY500sqrt;
+proc logistic data = WORK.TRY500xx;
 	model melon_seeds = price xx/ link = glogit;
 run;
