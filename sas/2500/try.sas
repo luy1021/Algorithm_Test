@@ -16,9 +16,9 @@ run;
 
 proc means data = WORK.TRY;
 	format melon_seeds melon_seedsl.;
-	var price lnCD1= WORK.TRY;
+	var price ln= WORK.TRY;
 	run;
 
 proc logistic data = WORK.TRY;
-	model melon_seeds = price lnCD1/ link = glogit;
+	model melon_seeds = price ln/ link = glogit;
 run;
