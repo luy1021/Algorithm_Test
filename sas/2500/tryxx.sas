@@ -3,10 +3,10 @@ proc contents data = WORK.TRYXX;
 
 proc format;
 value melon_seeds_l 
-  1="jiaotang"
-  2="hongzao" 
-  3="yuanwei"
-  4="bumai";
+  1="caramel"
+  2="red dates" 
+  3="origin"
+  4="nonpurchase";
 run;
 
 proc freq data = WORK.TRYXX;
