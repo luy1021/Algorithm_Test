@@ -3,11 +3,10 @@ proc contents data = WORK.TRY500;
 
 proc format;
 value melon_seeds_l 
-  1="jiaotang"
-  2="hongzao" 
-  3="hetao"
-  4="yuanwei"
-  5="bumai";
+  1="caramel"
+  2="red dates" 
+  3="origin"
+  4="nonpurchase";
 run;
 
 proc freq data = WORK.TRY500;
@@ -21,5 +20,5 @@ proc means data = WORK.TRY500;
 	run;
 
 proc logistic data = WORK.TRY500;
-	model melon_seeds = price lnCD1/ link = glogit;
+	model melon_seeds = price ln/ link = glogit;
 run;
